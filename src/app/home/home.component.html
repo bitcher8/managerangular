@@ -1,0 +1,50 @@
+<p>
+  Welcome {{login}}
+</p>
+<button type="button" (click)="addtask()">addtask</button>
+<form *ngIf="addform" #formtask="ngForm">
+  <label> info</label>
+  <input required ngModel name="info" type="text">
+  <br>
+  <label>level</label>
+  <input required ngModel name="level" type="text">
+  <br>
+
+
+  <button [disabled]="formtask.invalid" type="button" (click)="add(formtask)">add</button>
+  <button type="button" (click)="addtask()">cansel</button>
+</form>
+<p>your tasks</p>
+
+<table cellspacing="2" border="1" cellpadding="5" width="600">
+  <tr>
+
+    <td>info</td>
+    <td>level</td>
+    <td></td>
+    <td></td>
+    <td></td>
+
+  </tr>
+  <tr *ngFor="let t of tasks">
+
+
+    <td><input #info type="text" value="{{t.info}}"></td>
+    <td><input #level type="text" value="{{t.level}}"></td>
+    <td>
+      <form #formshare="ngForm">
+        <input required ngModel name="login" type="text">
+        <button [disabled]="formshare.invalid" type="button" (click)="share(t._id,formshare)">share</button>
+      </form>
+    </td>
+    <td>
+      <button type="button" (click)="edit(t._id, info.value,level.value )">edit</button>
+    </td>
+    <td>
+      <button type="button" (click)="delete(t._id)">delete</button>
+    </td>
+
+
+  </tr>
+
+</table>
